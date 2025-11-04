@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "./sections/Navbar";
 import Hero from "./sections/Hero";
 import ServiceSummary from "./sections/ServiceSummary";
@@ -9,16 +9,35 @@ import Works from "./sections/Works";
 import ContactSummary from "./sections/ContactSummary";
 import Contact from "./sections/Contact";
 import { useProgress } from "@react-three/drei";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 const App = () => {
   const { progress } = useProgress();
   const [isReady, setIsReady] = useState(false);
+  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
+  const contactRef = useRef(null);
 
   useEffect(() => {
     if (progress === 100) {
       setIsReady(true);
     }
   }, [progress]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (contactRef.current) {
+        const contactSectionTop = contactRef.current.getBoundingClientRect().top;
+        if (contactSectionTop <= window.innerHeight) {
+          setShowScrollToTopButton(true);
+        } else {
+          setShowScrollToTopButton(false);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isReady]);
 
   return (
     <ReactLenis root className="relative w-screen min-h-screen overflow-x-auto">
@@ -47,7 +66,8 @@ const App = () => {
         <About />
         <Works />
         <ContactSummary />
-        <Contact />
+        <Contact ref={contactRef} />
+        <ScrollToTopButton isVisible={showScrollToTopButton} />
       </div>
     </ReactLenis>
   );

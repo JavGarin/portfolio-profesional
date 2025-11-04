@@ -121,7 +121,7 @@ export const projects = [
     frameworks: [
       { id: 1, name: "React" },
       { id: 2, name: "Next.js" },
-      { id: 3, name: "Tailwind.CSS" },
+      { id: 3, name: "Tailwind CSS" },
       { id: 4, name: "Supabase" },
     ],
   },
@@ -130,7 +130,7 @@ export const projects = [
     name: "Three.js Portfolio Design",
     description:
       "Static personal portfolio that presents projects, skills and a creative touch through interactive graphics and animations.",
-    href: "",
+    href: "https://github.com/JavGarin/Porfolio-Web-jg25",
     image: "/assets/projects/designportfoliothree.png",
     bgImage: "/assets/backgrounds/poster.jpg",
     frameworks: [
@@ -160,20 +160,21 @@ export const projects = [
     id: 6,
     name: "Profit Gym",
     description:
-      "A gaming platform featuring discounted titles, top sellers, and genre-based browsing.",
-    href: "",
+      "A modern, responsive, and attractive landing page for a fictional gym named FitPro.",
+    href: "https://fitpro-gym-xi.vercel.app/",
     image: "/assets/projects/screenshot.avif",
     bgImage: "/assets/backgrounds/curtains.jpg",
     frameworks: [
-      { id: 1, name: "Svelte" },
-      { id: 2, name: "Node.js" },
-      { id: 3, name: "MongoDB" },
-      { id: 4, name: "Chakra UI" },
+      { id: 1, name: "React" },
+      { id: 2, name: "TypeScript" },
+      { id: 3, name: "Tailwind CSS" },
+      { id: 4, name: "Radix UI" },
+      { id: 5, name: "Vercel"},
     ],
   },
 ];
 export const socials = [
 
-  { name: "LinkedIn", href: "#" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/javgarin/" },
   { name: "GitHub", href: "https://github.com/JavGarin" },
 ];

@@ -39,12 +39,12 @@ const ContactSummary = () => {
             className="flex flex-col items-center justify-between min-h-screen gap-12 mt-16"
     >
         <Marquee items={items} />
-    <div className="overflow-hidden font-light text-center contact-text-responsive">
-        <p>
-            “ Let’s build a <br />
-            <span className="font-normal">memorable</span> &{" "}
-            <span className="italic">inspiring</span> <br />
-            web application <span className="text-gold">together</span> “
+    <div className="overflow-hidden font-light text-center contact-text-responsive relative z-10">
+        <p className="relative z-10">
+            “ Let's design a <br />
+            <span className="font-normal">powerful</span> &{" "}
+            <span className="italic">visionary</span> <br />
+            digital product <span className="text-gold">together</span> “
         </p>
         </div>
         <Marquee

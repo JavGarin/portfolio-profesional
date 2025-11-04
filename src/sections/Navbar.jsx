@@ -13,7 +13,7 @@ const Navbar = () => {
   const tl = useRef(null);
   const iconTl = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [showBurger, setShowBurger] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -79,13 +79,8 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      setShowBurger(currentScrollY <= lastScrollY || currentScrollY < 10);
-
-      lastScrollY = currentScrollY;
+      setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll, {
       passive: true,
@@ -149,7 +144,7 @@ const Navbar = () => {
                   rel="noopener noreferrer"
                   className="text-sm leading-loose tracking-widest uppercase hover:text-white transition-colors duration-300"
                 >
-                  {"{ "}
+                  {" { "}
                   {social.name}
                   {" }"}
                 </a>
@@ -159,13 +154,10 @@ const Navbar = () => {
         </div>
       </nav>
       <div
-        className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-black rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10"
+        className={`fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-black rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10 ${
+          isScrolled ? "opacity-50" : "opacity-100"
+        }`}
         onClick={toggleMenu}
-        style={
-          showBurger
-            ? { clipPath: "circle(50% at 50% 50%)" }
-            : { clipPath: "circle(0% at 50% 50%)" }
-        }
       >
         <span
           ref={topLineRef}
@@ -176,7 +168,7 @@ const Navbar = () => {
           className="block w-8 h-0.5 bg-white rounded-full origin-center"
         ></span>
       </div>
-    </>
+    </> 
   );
 };
 

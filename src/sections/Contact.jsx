@@ -1,24 +1,25 @@
+import React, { forwardRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
 import Marquee from "../components/Marquee";
 import { socials, email } from "../constants";
 import gsap from "gsap";
-import { useState } from "react";
 
-const Contact = () => {
+const Contact = forwardRef((props, ref) => {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-  const text = `Ready to grow your business? Let's build your app together`;
+  const text = `Ready to grow your business?
+                Let's build your app together`;
   const items = [
-    "your vision, my code",
-    "creativity & code",
-    "imagine it → I build it",
-    "your idea, my solution",
-    "just imagin, I code",
+      "build & solve",
+      "code → craft", 
+      "think > build",
+      "design → code",
+      "idea → app"
   ];
   useGSAP(() => {
     gsap.from(".social-link", {
@@ -36,11 +37,12 @@ const Contact = () => {
   return (
     <section
       id="contact"
+      ref={ref}
       className="flex flex-col justify-between min-h-screen bg-black"
     >
       <div>
         <AnimatedHeaderSection
-          subTitle={"You Dream It, I Code it"}
+          subTitle={"Your Vision, My Code"}
           title={"Contact"}
           text={text}
           textColor={"text-white"}
@@ -89,6 +91,6 @@ const Contact = () => {
       <Marquee items={items} className="text-white bg-transparent" />
     </section>
   );
-};
+});
 
 export default Contact;
