@@ -4,15 +4,14 @@ import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
 import { projects } from "../constants";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useTranslation } from "react-i18next";
 
 const Works = () => {
+  const { t } = useTranslation();
   const overlayRefs = useRef([]);
   const previewRef = useRef(null);
 
   const [currentIndex, setCurrentIndex] = useState(null);
-  const text = `Selected projects where technical precision and vision
-  come together to generate tangible
-  impact and measurable results`;
 
   const mouse = useRef({ x: 0, y: 0 });
   const moveX = useRef(null);
@@ -102,9 +101,9 @@ const Works = () => {
   return (
     <section id="work" className="flex flex-col min-h-screen">
       <AnimatedHeaderSection
-        subTitle={"Logic meets Aesthetics, Seamlessly"}
-        title={"Works"}
-        text={text}
+        subTitle={t('works_subtitle')}
+        title={t('works_title')}
+        text={t('works_text')}
         textColor={"text-primary-text"}
         withScrollTrigger={true}
       />
@@ -134,7 +133,7 @@ const Works = () => {
             {/* title */}
             <div className="flex justify-between px-10 text-primary-text transition-all duration-500 md:group-hover:px-12 md:group-hover:text-accent">
               <h2 className="lg:text-[32px] text-[26px] leading-none">
-                {project.name}
+                {t(`project_${project.id}_name`)}
               </h2>
               <Icon icon="lucide:arrow-up-right" className="md:size-6 size-5" />
             </div>

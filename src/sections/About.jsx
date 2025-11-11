@@ -4,16 +4,14 @@ import { AnimatedTextLines } from "../components/AnimatedTextLines";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
-    const text = `Full-Stack Developer & Designer`;
-    const aboutText = `Chilean-born full-stack developer with a background in design and illustration, blending technical precision with creative vision to craft exceptional user experiences.
-Focus: Scalable full-stack solutions, clean architecture, and efficient code that aligns with business goals.
-Values: Collaboration, independence, and a passion for continuous learning.
-Beyond code: Cycling, team sports, and exploring indie games to inspire new UX ideas.`;
+    const { t } = useTranslation();
     const imgRef = useRef(null);
+
     useGSAP(() => {
     ScrollTrigger.matchMedia({
         "(min-width: 768px)": function() {
@@ -44,9 +42,9 @@ Beyond code: Cycling, team sports, and exploring indie games to inspire new UX i
     return (
     <section id="about" className="min-h-screen bg-primary-bg rounded-b-4xl">
         <AnimatedHeaderSection
-            subTitle={"Cod with purpose, Built to scale"}
-            title={"About"}
-            text={text}
+            subTitle={t('about_subtitle')}
+            title={t('about_title')}
+            text={t('about_text_1')}
             textColor={"text-primary-text"}
             withScrollTrigger={true}
     />
@@ -57,7 +55,7 @@ Beyond code: Cycling, team sports, and exploring indie games to inspire new UX i
             alt="Javier Garín"
             className="w-md rounded-3xl"
         />
-        <AnimatedTextLines text={aboutText} className={"w-full"} />
+        <AnimatedTextLines text={t('about_text_2')} className={"w-full"} />
         </div>
     </section>
 );

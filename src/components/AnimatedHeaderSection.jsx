@@ -48,7 +48,12 @@ useGSAP(() => {
             <p
             className={`text-sm font-light tracking-[0.5rem] uppercase px-10 ${textColor}`}
         >
-            {subTitle}
+            {subTitle.split('\n').map((line, index) => (
+                <React.Fragment key={index}>
+                    {line}
+                    {index < subTitle.split('\n').length - 1 && <br />}
+                </React.Fragment>
+            ))}
             </p>
         <div className="px-10">
             <h1

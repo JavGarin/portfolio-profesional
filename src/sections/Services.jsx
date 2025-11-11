@@ -4,11 +4,10 @@ import { servicesData } from "../constants";
 import { useMediaQuery } from "react-responsive";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useTranslation } from "react-i18next";
 
 const Services = () => {
-  const text = `I build secure, high-performance full-stack apps
-    with smooth UX to drive growth
-    and efficiency.`;
+  const { t } = useTranslation();
   const serviceRefs = useRef([]);
   const isDesktop = useMediaQuery({ minWidth: "48rem" }); //768px
 
@@ -30,9 +29,9 @@ const Services = () => {
   return (
     <section id="services" className="min-h-screen bg-black rounded-t-4xl">
       <AnimatedHeaderSection
-        subTitle={"At the intersection of logic and creativity"}
-        title={"Service"}
-        text={text}
+        subTitle={t('services_subtitle')}
+        title={t('services_title')}
+        text={t('services_text')}
         textColor={"text-white"}
         withScrollTrigger={true}
       />
@@ -52,9 +51,9 @@ const Services = () => {
         >
           <div className="flex items-center justify-between gap-4 font-light">
             <div className="flex flex-col gap-6">
-              <h2 className="text-4xl lg:text-5xl">{service.title}</h2>
+              <h2 className="text-4xl lg:text-5xl">{t(`service_${index + 1}_title`)}</h2>
               <p className="text-xl leading-relaxed tracking-widest lg:text-2xl text-white/60 text-pretty">
-                {service.description}
+                {t(`service_${index + 1}_desc`)}
               </p>
               <div className="flex flex-col gap-2 text-2xl sm:gap-4 lg:text-3xl text-white/80">
                 {service.items.map((item, itemIndex) => (
@@ -63,7 +62,7 @@ const Services = () => {
                       <span className="mr-12 text-lg text-white/30">
                         0{itemIndex + 1}
                       </span>
-                      {item.title}
+                      {t(`service_${index + 1}_item_${itemIndex + 1}_title`)}
                     </h3>
                     {itemIndex < service.items.length - 1 && (
                       <div className="w-full h-px my-2 bg-white/30" />

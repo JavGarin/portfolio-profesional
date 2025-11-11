@@ -3,8 +3,10 @@ import { socials, email } from "../constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Link } from "react-scroll";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
   const navRef = useRef(null);
   const linksRef = useRef([]);
   const contactRef = useRef(null);
@@ -102,20 +104,21 @@ const Navbar = () => {
     <>
       <nav
         ref={navRef}
-        className="fixed z-50 flex flex-col justify-between w-full px-10 uppercase text-primary-text/80 py-16 gap-y-8 md:w-1/2 md:left-1/2 h-auto rounded-b-3xl backdrop-blur-xl bg-primary-bg/80"
+        className="fixed z-50 flex flex-col justify-between w-full px-10 uppercase py-16 gap-y-8 md:w-1/2 md:left-1/2 h-auto rounded-b-3xl backdrop-blur-xl bg-primary-bg/80 [.dark-section-active_&]:bg-black/70"
       >
-        <div className="flex flex-col text-4xl gap-y-2 md:text-5xl lg:text-7xl">
+        <div className="flex flex-col text-4xl gap-y-2 md:text-5xl lg:text-7xl text-primary-text/80">
           {["home", "services", "about", "work", "contact"].map(
             (section, index) => (
               <div key={index} ref={(el) => (linksRef.current[index] = el)}>
                 <Link
-                  className="transition-all duration-300 cursor-pointer hover:text-accent"
+                  className="transition-all duration-300 cursor-pointer hover:text-accent [.dark-section-active_&]:text-white [.dark-section-active_&]:[text-shadow:0_0_5px_rgba(255,255,255,0.5)]"
                   to={`${section}`}
                   smooth
                   offset={0}
                   duration={500}
+                  onClick={toggleMenu}
                 >
-                  {section}
+                  {t(`nav_${section}`)}
                 </Link>
               </div>
             )
@@ -126,15 +129,15 @@ const Navbar = () => {
           className="flex flex-col flex-wrap justify-between gap-8 md:flex-row"
         >
           <div className="font-light">
-            <p className="tracking-wider text-secondary-text/50">E-mail</p>
+            <p className="tracking-wider text-secondary-text/50 [.dark-section-active_&]:text-white/60">{t('nav_email')}</p>
             <div onClick={handleCopy} className="cursor-pointer">
-              <p className="text-xl tracking-widest lowercase text-pretty">
-                {copied ? "Copied!" : email}
+              <p className="text-xl tracking-widest lowercase text-pretty text-primary-text [.dark-section-active_&]:text-white">
+                {copied ? t('nav_copied') : email}
               </p>
             </div>
           </div>
           <div className="font-light">
-            <p className="tracking-wider text-secondary-text/50">Social Media</p>
+            <p className="tracking-wider text-secondary-text/50 [.dark-section-active_&]:text-white/60">{t('nav_social_media')}</p>
             <div className="flex flex-col flex-wrap md:flex-row gap-x-2">
               {socials.map((social, index) => (
                 <a
@@ -142,7 +145,7 @@ const Navbar = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm leading-loose tracking-widest uppercase hover:text-accent transition-colors duration-300"
+                  className="text-sm leading-loose tracking-widest uppercase transition-colors duration-300 text-primary-text hover:text-accent [.dark-section-active_&]:text-white"
                 >
                   {" { "}
                   {social.name}
@@ -151,21 +154,39 @@ const Navbar = () => {
               ))}
             </div>
           </div>
+          <div className="font-light">
+            <p className="tracking-wider text-secondary-text/50 [.dark-section-active_&]:text-white/60">{t('nav_language')}</p>
+            <div className="flex gap-x-4 text-xl tracking-widest uppercase text-primary-text [.dark-section-active_&]:text-white">
+              <button
+                onClick={() => i18n.changeLanguage('en')}
+                className={`transition-colors duration-200 cursor-pointer ${i18n.language === 'en' ? 'text-accent' : 'hover:text-accent/80'}`}
+              >
+                EN
+              </button>
+              <span>/</span>
+              <button
+                onClick={() => i18n.changeLanguage('es')}
+                className={`transition-colors duration-200 cursor-pointer ${i18n.language === 'es' ? 'text-accent' : 'hover:text-accent/80'}`}
+              >
+                ES
+              </button>
+            </div>
+          </div>
         </div>
       </nav>
       <div
-        className={`fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-primary-bg rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10 ${
+        className={`fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-primary-bg [.dark-section-active_&]:bg-neutral-800 rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10 ${
           isScrolled ? "opacity-50" : "opacity-100"
         }`}
         onClick={toggleMenu}
       >
         <span
           ref={topLineRef}
-          className="block w-8 h-0.5 bg-black rounded-full origin-center"
+          className="block w-8 h-0.5 bg-black rounded-full origin-center transition-all [.dark-section-active_&]:bg-white [.dark-section-active_&]:[filter:drop-shadow(0_0_2px_rgba(255,255,255,0.7))]"
         ></span>
         <span
           ref={bottomLineRef}
-          className="block w-8 h-0.5 bg-black rounded-full origin-center"
+          className="block w-8 h-0.5 bg-black rounded-full origin-center transition-all [.dark-section-active_&]:bg-white [.dark-section-active_&]:[filter:drop-shadow(0_0_2px_rgba(255,255,255,0.7))]"
         ></span>
       </div>
     </> 

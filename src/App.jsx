@@ -6,6 +6,11 @@ import Services from "./sections/Services";
 import ReactLenis from "lenis/react";
 import { useProgress } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const About = lazy(() => import("./sections/About"));
 const Works = lazy(() => import("./sections/Works"));
@@ -17,6 +22,20 @@ const App = () => {
   const [isReady, setIsReady] = useState(false);
   const contactRef = useRef(null);
   const isDesktop = useMediaQuery({ minWidth: 1024 }); // lg breakpoint
+
+  useGSAP(() => {
+    // GSAP logic to toggle a class on the body when scrolling over a dark section
+    ScrollTrigger.create({
+      trigger: "#services", // Target the dark section
+      start: "top 40%",
+      end: "bottom 60%",
+      toggleClass: {
+        targets: "body",
+        className: "dark-section-active",
+      },
+      // markers: true, // Uncomment for debugging
+    });
+  }, []);
 
   useEffect(() => {
     if (progress === 100) {

@@ -4,16 +4,18 @@ import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
 import Marquee from "../components/Marquee";
 import { socials, email } from "../constants";
 import gsap from "gsap";
+import { useTranslation } from "react-i18next";
 
 const Contact = forwardRef((props, ref) => {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
+  
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-  const text = `Ready to grow your business?
-                Let's build your app together`;
+
   const items = [
       "build & solve",
       "code → craft", 
@@ -21,6 +23,7 @@ const Contact = forwardRef((props, ref) => {
       "design → code",
       "idea → app"
   ];
+
   useGSAP(() => {
     gsap.from(".social-link", {
       y: 100,
@@ -34,6 +37,7 @@ const Contact = forwardRef((props, ref) => {
       },
     });
   }, []);
+
   return (
     <section
       id="contact"
@@ -42,32 +46,25 @@ const Contact = forwardRef((props, ref) => {
     >
       <div>
         <AnimatedHeaderSection
-          subTitle={"Your Vision, My Code"}
-          title={"Contact"}
-          text={text}
+          subTitle={t('contact_subtitle')}
+          title={t('contact_title')}
+          text={t('contact_text')}
           textColor={"text-primary-text"}
           withScrollTrigger={true}
         />
         <div className="flex px-10 font-light text-primary-text uppercase lg:text-[32px] text-[26px] leading-none mb-10">
           <div className="flex flex-col w-full gap-10">
             <div className="social-link">
-              <h2>E-mail</h2>
+              <h2>{t('contact_email_label')}</h2>
               <div className="w-full h-px my-2 bg-secondary-text/30" />
               <div onClick={handleCopy} className="cursor-pointer">
                 <p className="text-xl tracking-wider lowercase md:text-2xl lg:text-3xl">
-                  {copied ? "Copied!" : email}
+                  {copied ? t('nav_copied') : email}
                 </p>
               </div>
             </div>
-            {/* <div className="social-link">
-              <h2>Phone</h2>
-              <div className="w-full h-px my-2 bg-white/30" />
-              <p className="text-xl lowercase md:text-2xl lg:text-3xl">
-                +33 7 12 12 32 12
-              </p>
-            </div> */}
             <div className="social-link">
-              <h2>Social Media</h2>
+              <h2>{t('contact_social_media_label')}</h2>
               <div className="w-full h-px my-2 bg-secondary-text/30" />
               <div className="flex flex-wrap gap-2">
                 {socials.map((social, index) => (
