@@ -118,50 +118,59 @@ const Works = () => {
             href={project.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative flex flex-col gap-1 py-5 cursor-pointer group md:gap-0"
+            className="relative flex flex-col py-5 cursor-pointer group"
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={() => handleMouseLeave(index)}
           >
-            {/* overlay */}
-            <div
-              ref={(el) => {
-                overlayRefs.current[index] = el;
-              }}
-              className="absolute inset-0 hidden md:block duration-200 bg-primary-bg -z-10 clip-path"
-            />
-
-            {/* title */}
-            <div className="flex justify-between px-10 text-primary-text transition-all duration-500 md:group-hover:px-12 md:group-hover:text-accent">
-              <h2 className="lg:text-[32px] text-[26px] leading-none">
-                {t(`project_${project.id}_name`)}
-              </h2>
-              <Icon icon="lucide:arrow-up-right" className="md:size-6 size-5" />
-            </div>
-            {/* divider */}
-            <div className="w-full h-0.5 bg-secondary-text" />
-            {/* framework */}
-            <div className="flex px-10 text-xs leading-loose uppercase transtion-all duration-500 md:text-sm gap-x-5 md:group-hover:px-12">
-              {project.frameworks.map((framework) => (
-                <p
-                  key={framework.id}
-                  className="text-secondary-text transition-colors duration-500 md:group-hover:text-accent"
-                >
-                  {framework.name}
-                </p>
-              ))}
-            </div>
-            {/* mobile preview image */}
-            <div className="relative flex items-center justify-center px-10 md:hidden h-[400px]">
-              <img
-                src={project.bgImage}
-                alt={`${project.name}-bg-image`}
-                className="object-cover w-full h-full rounded-md brightness-50"
+            {/* --- DESKTOP VIEW --- */}
+            <div className="hidden md:block">
+              <div
+                ref={(el) => {
+                  overlayRefs.current[index] = el;
+                }}
+                className="absolute inset-0 duration-200 bg-primary-bg -z-10 clip-path"
               />
+              <div className="flex justify-between px-10 text-primary-text transition-all duration-500 md:group-hover:px-12 md:group-hover:text-accent">
+                <h2 className="lg:text-[32px] text-[26px] leading-none">
+                  {t(`project_${project.id}_name`)}
+                </h2>
+                <Icon icon="lucide:arrow-up-right" className="md:size-6 size-5" />
+              </div>
+              <div className="w-full h-0.5 bg-secondary-text mt-1" />
+              <div className="flex px-10 text-xs leading-loose uppercase transtion-all duration-500 md:text-sm gap-x-5 md:group-hover:px-12">
+                {project.frameworks.map((framework) => (
+                  <p
+                    key={framework.id}
+                    className="text-secondary-text transition-colors duration-500 md:group-hover:text-accent"
+                  >
+                    {framework.name}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            {/* --- MOBILE CARD VIEW --- */}
+            <div className="flex flex-col gap-4 px-6 md:hidden">
               <img
                 src={project.image}
-                alt={`${project.name}-image`}
-                className="absolute bg-center px-14 rounded-xl"
+                alt={t(`project_${project.id}_name`)}
+                className="object-contain w-full rounded-lg h-60"
               />
+              <div className="flex flex-col px-2">
+                <div className="flex items-center justify-between text-primary-text">
+                  <h2 className="text-2xl leading-none">
+                    {t(`project_${project.id}_name`)}
+                  </h2>
+                  <Icon icon="lucide:arrow-up-right" className="size-5" />
+                </div>
+                <div className="flex flex-wrap mt-2 text-xs leading-loose uppercase gap-x-3">
+                  {project.frameworks.map((framework) => (
+                    <p key={framework.id} className="text-secondary-text">
+                      {framework.name}
+                    </p>
+                  ))}
+                </div>
+              </div>
             </div>
           </a>
         ))}
