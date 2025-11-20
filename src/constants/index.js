@@ -143,17 +143,17 @@ export const projects = [
   },
   {
     id: 5,
-    name: "Home Decor Marketplace",
+    name: "Tech Store Marketplace",
     description:
-      "A curated collection of designer home decor items, including furniture and artisan vases.",
-    href: "https://github.com/JavGarin/home-decor-marketplace",
-    image: "/assets/projects/home-decor-store.jpg",
+      "A modern and responsive e-commerce simulation for tech products, built with cutting-edge web technologies.",
+    href: "https://tech-store-web-nine.vercel.app/",
+    image: "/assets/projects/techstore.avif",
     bgImage: "/assets/backgrounds/table.avif",
     frameworks: [
-      { id: 1, name: "Angular" },
+      { id: 1, name: "React" },
       { id: 2, name: "Firebase" },
-      { id: 3, name: "GraphQL" },
-      { id: 4, name: "Material UI" },
+      { id: 3, name: "Tailwind CSS" },
+      { id: 4, name: "JavaScript" },
     ],
   },
   {
